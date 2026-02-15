@@ -102,7 +102,7 @@ const MemeEditor = ({ characters }) => {
                 </CardHeader>
                 <CardContent className="space-y-4">
 
-                    {/* AI Generator Section */}
+                    {/* AI Generator Section
                     <div className="p-4 bg-secondary/20 rounded-lg border border-secondary mb-4">
                         <label className="block text-sm font-bold mb-1 text-primary">✨ AI Magic Generator</label>
                         <div className="flex gap-2">
@@ -123,7 +123,7 @@ const MemeEditor = ({ characters }) => {
                                 {aiLoading ? <RefreshCw className="h-4 w-4 animate-spin" /> : <Type className="h-4 w-4" />}
                             </Button>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div>
                         <label className="block text-sm font-medium mb-1">Character</label>
@@ -132,7 +132,7 @@ const MemeEditor = ({ characters }) => {
                                 <button
                                     key={char._id}
                                     onClick={() => handleCharChange(char.name)}
-                                    className={`flex-shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 transaction-all ${selectedChar.name === char.name ? 'border-primary ring-2 ring-primary/50' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                                    className={`shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 transaction-all ${selectedChar.name === char.name ? 'border-primary ring-2 ring-primary/50' : 'border-transparent opacity-70 hover:opacity-100'}`}
                                 >
                                     <img src={char.image} alt={char.name} className="w-full h-full object-cover" />
                                 </button>
@@ -197,7 +197,7 @@ const MemeEditor = ({ characters }) => {
             <div className="flex-1 flex items-start justify-center">
                 <div
                     ref={memeRef}
-                    className="relative w-full max-w-[500px] aspect-square bg-black shadow-2xl rounded-lg overflow-hidden border-4 border-muted"
+                    className="relative w-full max-w-125 aspect-square bg-black shadow-2xl rounded-lg overflow-hidden border-4 border-muted"
                 >
                     <img src={selectedPose} alt="Meme Template" className="w-full h-full object-contain bg-black" crossOrigin="anonymous" />
 
