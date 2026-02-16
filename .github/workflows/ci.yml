@@ -58,7 +58,7 @@ jobs:
             docker build -t ${{ secrets.DOCKER_USERNAME }}/cid-meme-backend ./backend
             docker push ${{ secrets.DOCKER_USERNAME }}/cid-meme-backend
         
-      - name: Build and Pull frontend
+      - name: Build and Push frontend
         run: |
             docker build -t ${{ secrets.DOCKER_USERNAME }}/cid-meme-frontend ./frontend
             docker push ${{ secrets.DOCKER_USERNAME }}/cid-meme-frontend
