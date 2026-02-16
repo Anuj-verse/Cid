@@ -1,0 +1,77 @@
+name: CI Pipeline
+
+on: 
+  push: 
+    branches:
+    - main
+
+jobs:
+  tests:
+    runs_on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      #backend test
+      - name: Setup node (backend)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install backend dependencies
+        run: |
+            cd backend
+            npm install
+
+      - name: Run backend tests
+        run: |
+            cd backend
+            npm test
+
+      #frontend test
+      - name: Install frontend dependencies
+        run: |
+            cd frontend
+            npm install
+      
+      - name: Run frontend tests
+        run: |
+            cd frontend
+            npm test
+  
+
+  build-and-push:
+    needs: tests
+    runs_on: ubuntu-latest
+
+    steps: 
+      - uses: actions/checkout@v3
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v2
+        with: 
+            username: ${{ secrets.DOCKER_USERNAME }}
+            password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build and Push backend
+        run: |
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/cid-meme-backend ./backend
+            docker push ${{ secrets.DOCKER_USERNAME }}/cid-meme-backend
+        
+      - name: Build and Pull frontend
+        run: |
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/cid-meme-frontend ./frontend
+            docker push ${{ secrets.DOCKER_USERNAME }}/cid-meme-frontend
+
+
+  # deploy:
+  #   needs: build-and-push
+  #   runs_on: ubuntu-latest
+
+  #   steps: 
+  #     - name: Deploy to EC2
+  #       run: 
+
+
+
+      

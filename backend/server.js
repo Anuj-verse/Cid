@@ -55,7 +55,7 @@ app.get("/character/:name/random", async (req, res) => {
     }
 });
 
-const { generateMemeCaption } = require('./services/aiService');
+
 
 // ... (existing code)
 
