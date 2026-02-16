@@ -8,8 +8,12 @@ RUN npm install
 COPY . .
 RUN npm run build
 
+# Install static server
+RUN npm install -g serve
+
 EXPOSE 80
-CMD ["npm","run","dev"]
+
+CMD ["serve", "-s", "dist", "-l", "80"]
 
 
 
