@@ -13,7 +13,7 @@ function App() {
 
   const fetchCharacters = async () => {
     try {
-      const response = await fetch('http://localhost:3000/characters')
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/characters`)
       const data = await response.json()
       setCharacters(data)
     } catch (error) {
