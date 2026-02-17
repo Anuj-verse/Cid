@@ -60,27 +60,27 @@ const MemeEditor = ({ characters }) => {
         setLoading(false);
     };
 
-    const handleAiGenerate = async () => {
-        if (!aiContext) return;
-        setAiLoading(true);
-        try {
-            const response = await fetch(`/api/generate-caption`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    character: selectedChar.name,
-                    context: aiContext
-                })
-            });
-            const data = await response.json();
-            if (data.topText) setTopText(data.topText);
-            if (data.bottomText) setBottomText(data.bottomText);
-        } catch (error) {
-            console.error("Error generating AI caption:", error);
-            alert("Failed to generate AI caption. Check backend logs.");
-        }
-        setAiLoading(false);
-    };
+    // const handleAiGenerate = async () => {
+    //     if (!aiContext) return;
+    //     setAiLoading(true);
+    //     try {
+    //         const response = await fetch(`http://localhost:5000/api/generate-caption`, {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/json' },
+    //             body: JSON.stringify({
+    //                 character: selectedChar.name,
+    //                 context: aiContext
+    //             })
+    //         });
+    //         const data = await response.json();
+    //         if (data.topText) setTopText(data.topText);
+    //         if (data.bottomText) setBottomText(data.bottomText);
+    //     } catch (error) {
+    //         console.error("Error generating AI caption:", error);
+    //         alert("Failed to generate AI caption. Check backend logs.");
+    //     }
+    //     setAiLoading(false);
+    // };
 
     const generateRandomQuote = () => {
         // Fetch random dialogue for selected character
@@ -96,7 +96,7 @@ const MemeEditor = ({ characters }) => {
     return (
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
             {/* Configuration Panel */}
-            <Card className="flex-1">
+            <Card className="flex-1 w-160">
                 <CardHeader>
                     <CardTitle>Meme Controls</CardTitle>
                 </CardHeader>
@@ -126,13 +126,13 @@ const MemeEditor = ({ characters }) => {
                     </div> */}
 
                     <div>
-                        <label className="block text-sm font-medium mb-1">Character</label>
-                        <div className="flex gap-2 overflow-x-auto pb-2">
+                        <label className="block text-sm font-medium mb-1">Characters</label>
+                        <div className="flex gap-2 overflow-x-auto pb-2 no-scrollbar scroll-smooth">
                             {characters.map(char => (
                                 <button
                                     key={char._id}
                                     onClick={() => handleCharChange(char.name)}
-                                    className={`shrink-0 w-16 h-16 rounded-full overflow-hidden border-2 transaction-all ${selectedChar.name === char.name ? 'border-primary ring-2 ring-primary/50' : 'border-transparent opacity-70 hover:opacity-100'}`}
+                                    className={`shrink-0 w-16 h-16 rounded-full overflow-hidden  border-2 transaction-all ${selectedChar.name === char.name ? 'border-primary ring-2 ring-primary/50' : 'border-transparent opacity-70 hover:opacity-100'}`}
                                 >
                                     <img src={char.image} alt={char.name} className="w-full h-full object-cover" />
                                 </button>
@@ -202,13 +202,13 @@ const MemeEditor = ({ characters }) => {
                     <img src={selectedPose} alt="Meme Template" className="w-full h-full object-contain bg-black" crossOrigin="anonymous" />
 
                     <div className="absolute top-4 left-0 right-0 text-center px-4">
-                        <span className="text-4xl font-extrabold text-white stroke-black uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                        <span className="text-4xl font-black text-white stroke-black " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
                             {topText}
                         </span>
                     </div>
 
                     <div className="absolute bottom-4 left-0 right-0 text-center px-4">
-                        <span className="text-4xl font-extrabold text-white stroke-black uppercase drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                        <span className="text-4xl font-black text-white stroke-black" style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
                             {bottomText}
                         </span>
                     </div>
