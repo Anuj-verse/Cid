@@ -18,12 +18,12 @@ mongoose.connect(process.env.MONGO_URL)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     res.send("Welcome to CID Meme API!");
 });
 
 // Get all characters
-app.get("/characters", async (req, res) => {
+app.get("/api/characters", async (req, res) => {
     try {
         const characters = await Character.find();
         res.json(characters);
@@ -37,7 +37,7 @@ const Meme = require('./models/Meme');
 // ... (existing code)
 
 // Get random dialogue for a specific character
-app.get("/character/:name/random", async (req, res) => {
+app.get("/api/character/:name/random", async (req, res) => {
     try {
         const character = await Character.findOne({ name: new RegExp('^' + req.params.name + '$', "i") });
         if (!character) {
@@ -62,7 +62,7 @@ app.get("/character/:name/random", async (req, res) => {
 // MEME ROUTES
 
 // Generate AI Caption
-app.post("/generate-caption", async (req, res) => {
+app.post("/api/generate-caption", async (req, res) => {
     try {
         const { character, context } = req.body;
         if (!context) {
@@ -77,7 +77,7 @@ app.post("/generate-caption", async (req, res) => {
 });
 
 // Save a new meme
-app.post("/memes", async (req, res) => {
+app.post("/api/memes", async (req, res) => {
     // ...
     try {
         const { character, imageUrl, topText, bottomText } = req.body;
@@ -90,7 +90,7 @@ app.post("/memes", async (req, res) => {
 });
 
 // Get all memes (newest first)
-app.get("/memes", async (req, res) => {
+app.get("/api/memes", async (req, res) => {
     try {
         const memes = await Meme.find().sort({ createdAt: -1 });
         res.json(memes);
@@ -100,7 +100,7 @@ app.get("/memes", async (req, res) => {
 });
 
 // Like a meme
-app.post("/memes/:id/like", async (req, res) => {
+app.post("/api/memes/:id/like", async (req, res) => {
     try {
         const meme = await Meme.findById(req.params.id);
         if (!meme) return res.status(404).json({ error: "Meme not found" });
