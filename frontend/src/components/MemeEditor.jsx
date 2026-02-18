@@ -96,7 +96,7 @@ const MemeEditor = ({ characters }) => {
     return (
         <div className="flex flex-col md:flex-row gap-8 w-full max-w-6xl">
             {/* Configuration Panel */}
-            <Card className="flex-1 w-160">
+            <Card className="flex-1 md:w-160 ">
                 <CardHeader>
                     <CardTitle>Meme Controls</CardTitle>
                 </CardHeader>
@@ -201,21 +201,18 @@ const MemeEditor = ({ characters }) => {
                 >
                     <img src={selectedPose} alt="Meme Template" className="w-full h-full object-contain bg-black" crossOrigin="anonymous" />
 
-                    <div className="absolute top-0 left-0 right-0 text-center px-4">
-                        <span className="text-4xl font-black text-white  " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                    <div className="absolute top-0 left-0 right-0 text-center px-4 text-3xl">
+                        <span className="text-[1em] font-black text-white stroke-black" style={{ textShadow: '1px 1px 0 black',fontFamily: 'Impact, sans-serif' }}>
                             {topText}
                         </span>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 right-0 text-center px-4">
-                        <span className="text-5xl font-black text-white " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                    <div className="absolute bottom-0 left-0 right-0 text-center px-4 text-3xl">
+                        <span className="text-[1em] font-black text-white stroke-black" style={{textShadow: '1px 1px 0 black', fontFamily: 'Impact, sans-serif' }}>
                             {bottomText}
                         </span>
                     </div>
 
-                    <div className="absolute top-2 right-2 opacity-50 text-[10px] text-white">
-                        cid-meme-gen
-                    </div>
                 </div>
             </div>
         </div>
