@@ -13,7 +13,7 @@ function App() {
 
   const fetchCharacters = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/characters`)
+      const response = await fetch(`/api/characters`)
       const data = await response.json()
       setCharacters(data)
     } catch (error) {

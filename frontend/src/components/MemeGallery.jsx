@@ -12,7 +12,7 @@ const MemeGallery = () => {
 
     const fetchMemes = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/memes`);
+            const res = await fetch(`/api/memes`);
             const data = await res.json();
             setMemes(data);
         } catch (err) {
@@ -22,7 +22,7 @@ const MemeGallery = () => {
 
     const handleLike = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/memes/${id}/like`, { method: 'POST' });
+            const res = await fetch(`/api/memes/${id}/like`, { method: 'POST' });
             if (res.ok) {
                 const updatedMeme = await res.json();
                 setMemes(prev => prev.map(m => m._id === id ? updatedMeme : m));
