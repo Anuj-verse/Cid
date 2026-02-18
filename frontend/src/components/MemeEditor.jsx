@@ -201,14 +201,14 @@ const MemeEditor = ({ characters }) => {
                 >
                     <img src={selectedPose} alt="Meme Template" className="w-full h-full object-contain bg-black" crossOrigin="anonymous" />
 
-                    <div className="absolute top-4 left-0 right-0 text-center px-4">
-                        <span className="text-4xl font-black text-white stroke-black " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                    <div className="absolute top-0 left-0 right-0 text-center px-4">
+                        <span className="text-4xl font-black text-white  " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
                             {topText}
                         </span>
                     </div>
 
-                    <div className="absolute bottom-4 left-0 right-0 text-center px-4">
-                        <span className="text-4xl font-black text-white stroke-black" style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
+                    <div className="absolute bottom-0 left-0 right-0 text-center px-4">
+                        <span className="text-4xl font-black text-white " style={{ WebkitTextStroke: '2px black', fontFamily: 'Impact, sans-serif' }}>
                             {bottomText}
                         </span>
                     </div>
