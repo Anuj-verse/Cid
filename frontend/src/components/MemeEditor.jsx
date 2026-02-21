@@ -37,7 +37,7 @@ const MemeEditor = ({ characters }) => {
                 const canvas = await html2canvas(memeRef.current);
                 const imageUrl = canvas.toDataURL();
 
-                const response = await fetch(`/api/memes`, {
+                const response = await fetch(`${import.meta.env.VITE_URL}/api/memes`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -84,7 +84,7 @@ const MemeEditor = ({ characters }) => {
 
     const generateRandomQuote = () => {
         // Fetch random dialogue for selected character
-        fetch(`/api/character/${selectedChar.name}/random`)
+        fetch(`${import.meta.env.VITE_URL}/api/character/${selectedChar.name}/random`)
             .then(res => res.json())
             .then(data => {
                 setBottomText(data.dialogue);
