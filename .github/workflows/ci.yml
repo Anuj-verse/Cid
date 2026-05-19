@@ -51,6 +51,10 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
 
+      - name: Set lowercase repository owner
+        run: |
+          echo "OWNER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
@@ -60,16 +64,16 @@ jobs:
       
       - name: Build and Push backend
         run: |
-            docker build -t ghcr.io/${{ github.repository_owner }}/cid-meme-backend:latest ./backend
-            docker push ghcr.io/${{ github.repository_owner }}/cid-meme-backend:latest
+            docker build -t ghcr.io/${OWNER}/cid-meme-backend:latest ./backend
+            docker push ghcr.io/${OWNER}/cid-meme-backend:latest
         
       - name: Build and Push frontend
         run: |
             docker build \
               --build-arg VITE_API_URL=http://${{ secrets.EC2_HOST }}:5000 \
-              -t ghcr.io/${{ github.repository_owner }}/cid-meme-frontend:latest ./frontend
+              -t ghcr.io/${OWNER}/cid-meme-frontend:latest ./frontend
 
-            docker push ghcr.io/${{ github.repository_owner }}/cid-meme-frontend:latest
+            docker push ghcr.io/${OWNER}/cid-meme-frontend:latest
 
 
   deploy:
